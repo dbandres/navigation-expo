@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerActions } from "@react-navigation/native";
 import { router, Stack, useNavigation } from "expo-router";
+import { View } from "react-native";
 
 
 const StackLayout = () => {
@@ -8,9 +9,9 @@ const StackLayout = () => {
     const navigation = useNavigation();
 
     const onHeaderLeft = (canGoBack: boolean) => {
-        if(canGoBack){
+        if (canGoBack) {
             router.back();
-        }else{
+        } else {
             navigation.dispatch(DrawerActions.toggleDrawer);
         }
     }
@@ -20,41 +21,44 @@ const StackLayout = () => {
         <Stack
             screenOptions={{
                 headerShadowVisible: false,
-                contentStyle:{backgroundColor: "#ffffff"},
-                    headerLeft: ({tintColor, canGoBack}) => (
+                contentStyle: { backgroundColor: "#ffffff" },
+                headerLeft: ({ tintColor, canGoBack }) => (
+                    <View className="flex items-center w-10 h-10 justify-center ">
                         <Ionicons
-                            name={ canGoBack ? "arrow-back" : "grid-outline"}
-                            size={18}
-                            className="mr-2"
-                            color={tintColor}
+                            name={canGoBack ? "arrow-back" : "grid-outline"}
+                            size={20}
+                            color={"black"}
                             onPress={() => onHeaderLeft(canGoBack ?? false)}
                         />
-                    )
+                    </View>
+
+                )
+                /* headerLeft: () => (<Text>Hola</Text>) */
             }}
-           
+
         >
-            <Stack.Screen 
-                name="home/index" 
+            <Stack.Screen
+                name="home/index"
                 options={{
-                    title: "Home ",
+                    title: "Inicio",
                 }}
             />
-            <Stack.Screen 
-                name="productos/index" 
+            <Stack.Screen
+                name="productos/index"
                 options={{
                     title: "Productos ",
                 }}
             />
-            <Stack.Screen 
-                name="profile/index" 
+            <Stack.Screen
+                name="profile/index"
                 options={{
-                    title: "Profile ",
+                    title: "Perfil",
                 }}
             />
-            <Stack.Screen 
-                name="settings/index" 
+            <Stack.Screen
+                name="settings/index"
                 options={{
-                    title: "Settings ",
+                    title: "Configuración",
                 }}
             />
         </Stack>
